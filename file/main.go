@@ -20,8 +20,10 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(200, "Hello, World!")
 	})
+	
 
-	e.GET("/allRecords", c.NewRecordController().GetAllRecords)
+	e.GET("/records", c.NewRecordController().GetAllRecords)
+	e.GET("/records/:no", c.NewRecordController().GetRecordByNo)
 
 	e.Start(":" + os.Getenv("PORT"))
 }

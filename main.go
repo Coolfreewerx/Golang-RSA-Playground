@@ -6,7 +6,12 @@ import (
 	"crypto/sha256"
 	"decode-decrypt-playground/ciphers"
 	"fmt"
+	"io/ioutil"
+
 )
+
+const pubKey = "ciphers/tam-public-key.asc"
+const fileToEnc = "/tmp/data.txt"
 
 func main() {
 
@@ -17,13 +22,15 @@ func main() {
 		Finaly, Tam will get the message.
 	/*/
 
- 	bits := 1024
  	m := "Test-RSA Decryption with Tam's Private Key"
 	fmt.Printf("\nMessage : %s\n\n", m)
 
+	tamPublicKeyData, _ := ioutil.ReadFile("ciphers/tamtam-public-key.asc")
+	tamPrivateKeyData, _ := ioutil.ReadFile("ciphers/tamtam-private-key.asc")
+	phassphrase := []byte("tamtam1122")
 
- 	tamPrivateKey, _ := rsa.GenerateKey(rand.Reader,bits)
- 	tamPublicKey := &tamPrivateKey.PublicKey
+	tamPublicKey := ciphers.BytesToPublicKey(tamPublicKeyData)
+	tamPrivateKey := ciphers.BytesToPrivateKey(tamPrivateKeyData, phassphrase)
 
  	fmt.Printf("%s\n",  ciphers.ExportPrivateKeyAsPemStr(tamPrivateKey))
  	fmt.Printf("%s\n", ciphers.ExportPublicKeyAsPemStr(tamPublicKey))
@@ -33,7 +40,7 @@ func main() {
  	hash := sha256.New()
 
 	// Encrypt message with Tam's Public Key
- 	ciphertext, _ := rsa.EncryptOAEP(hash, rand.Reader, tamPublicKey, message,label)
+ 	ciphertext, _ := rsa.EncryptOAEP(hash, rand.Reader, tamPublicKey, message, label)
  	fmt.Printf("%s\n",ciphers.ExportMsgAsPemStr(ciphertext))
 
 	// Encode & Decode message from RSA Encryption by use base64

@@ -1,5 +1,5 @@
 # Golang-RSA-Playground
-- Encrypt & Decrypt message by use RSA-4096 
+- Encrypt & Decrypt message by use public key & private key RSA-4096 (*.asc)  
 - Encode & Decode encrypted message by use Base64
 
 ### Result-Test

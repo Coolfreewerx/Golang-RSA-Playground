@@ -15,13 +15,6 @@ const fileToEnc = "/tmp/data.txt"
 
 func main() {
 
-	/*/ 
-	 	In practice, someone want to send a message to Tam will use Tam's public key to encrypt the message.
-		Then, Bring encrypted message to Tam by use Base64 to encode the message. 
-		After that, Tam will decode the message by use Base64 and decrypt the message by use Tam's private key.
-		Finaly, Tam will get the message.
-	/*/
-
  	m := "Test-RSA Decryption with Tam's Private Key"
 	fmt.Printf("\nMessage : %s\n\n", m)
 

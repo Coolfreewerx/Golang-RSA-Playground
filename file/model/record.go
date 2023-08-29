@@ -29,7 +29,7 @@ type OutputRecord struct {
 }
 
 type AllOutputRecords struct {
-	Message 				string 			`json:"message"`
-	Total_record 			int  			`json:"total_record"`
-	Info_record		    []OutputRecord 		`json:"info_record"`
+	Message 			string 			`json:"message"`
+	Total_record 		int  			`json:"total_record"`
+	Info_record		    []OutputRecord 	`json:"info_record"`
 }

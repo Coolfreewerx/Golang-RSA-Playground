@@ -26,7 +26,6 @@ func ExportMsgAsPemStr(msg []byte) string {
     return msg_pem
 }
 
-// BytesToPrivateKey bytes to private key
 func BytesToPrivateKey(priv []byte, passphrase []byte) *rsa.PrivateKey {
     entityList, err := openpgp.ReadArmoredKeyRing(bytes.NewReader(priv))
 	if err != nil {
@@ -34,48 +33,43 @@ func BytesToPrivateKey(priv []byte, passphrase []byte) *rsa.PrivateKey {
 		return nil
 	}
 
-    tamPrivateKey := entityList[0].PrivateKey
-	if tamPrivateKey == nil {
+    privateKey := entityList[0].PrivateKey
+	if privateKey == nil {
         fmt.Println("No private key found in armor block")
 		return nil
 	}
 
-	err = tamPrivateKey.Decrypt(passphrase)
+	err = privateKey.Decrypt(passphrase)
 	if err != nil {
         fmt.Println("Error decrypting private key: ", err)
 		return nil
 	}
 
-	if tamPrivateKey.PubKeyAlgo != packet.PubKeyAlgoRSA {
+	if privateKey.PubKeyAlgo != packet.PubKeyAlgoRSA {
         fmt.Println("PGP key is not RSA private key")
 		return nil
 	}
 
-	return tamPrivateKey.PrivateKey.(*rsa.PrivateKey)
+	return privateKey.PrivateKey.(*rsa.PrivateKey)
 }
 
-// BytesToPublicKey bytes to public key
 func BytesToPublicKey(pub []byte) *rsa.PublicKey {
-	// block, _ := armor.Decode(bytes.NewReader(pub))
-
     entityList, err := openpgp.ReadArmoredKeyRing(bytes.NewReader(pub))
 	if err != nil {
         fmt.Println("Error reading public key: ", err)
 		return nil
 	}
 
-	tamPublicKey := entityList[0].PrimaryKey
-	if tamPublicKey == nil {
+	publicKey := entityList[0].PrimaryKey
+	if publicKey == nil {
         fmt.Println("Error reading public key: ", err)
 		return nil
 	}
 
-	if tamPublicKey.PubKeyAlgo != packet.PubKeyAlgoRSA {
+	if publicKey.PubKeyAlgo != packet.PubKeyAlgoRSA {
+		fmt.Println("PGP key is not RSA public key")
 		return nil
 	}
 
-	return tamPublicKey.PublicKey.(*rsa.PublicKey)
+	return publicKey.PublicKey.(*rsa.PublicKey)
 }
-
-
-

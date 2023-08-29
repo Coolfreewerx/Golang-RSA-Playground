@@ -19,7 +19,7 @@ func main() {
 	}
 	
 	// Encrypt/Decrypt message with RSA and encode/decode encrypted message with base64
-	ciphers.CipherWithRSAandBase64(os.Getenv("TAM_PUBLIC_KEY"), os.Getenv("TAM_PRIVATE_KEY"), os.Getenv("MESSAGE"))
+	ciphers.CipherWithRSAandBase64(os.Getenv("TAM_PUBLIC_KEY"), os.Getenv("TAM_PRIVATE_KEY"), os.Getenv("MESSAGE"), os.Getenv("TAM_PASSPHRASE"))
 
 	e := echo.New()
 

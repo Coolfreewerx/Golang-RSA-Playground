@@ -1,7 +1,7 @@
 package service
 
 import (
-	m "decode-decrypt-playground/file/model"
+	m "decode-decrypt-playground/model"
 	"log"
 	"os"
 

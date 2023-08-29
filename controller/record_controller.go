@@ -1,8 +1,8 @@
 package controller
 
 import (
-	m "decode-decrypt-playground/file/model"
-	s "decode-decrypt-playground/file/service"
+	m "decode-decrypt-playground/model"
+	s "decode-decrypt-playground/service"
 	"net/http"
 	"strconv"
 

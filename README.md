@@ -1,6 +1,7 @@
 # Golang-RSA-Playground
 - Encrypt & Decrypt file (`*.csv.zip`) by use public key & private key RSA-4096 (`*.asc`)  
 - Encode & Decode encrypted file (*.csv.zip) by use Base64
+- API for covid-thailand-2021
 
 ## Result-Test
 #### Encrypt zip file , encode/decode encrypted zip file and decrypt zip file to csv file

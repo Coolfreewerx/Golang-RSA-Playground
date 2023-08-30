@@ -1,0 +1,83 @@
+definitions:
+  model.AllOutputRecords:
+    properties:
+      info_record:
+        items:
+          $ref: '#/definitions/model.OutputRecord'
+        type: array
+      message:
+        type: string
+      total_record:
+        type: integer
+    type: object
+  model.OutputRecord:
+    properties:
+      age:
+        type: integer
+      announce_date:
+        type: string
+      "no":
+        type: integer
+      province_of_onset:
+        type: string
+      risk:
+        type: string
+      sex:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /records:
+    get:
+      consumes:
+      - '*/*'
+      description: Get all records from covid-thailand-2021.csv.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/model.AllOutputRecords'
+            type: array
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Show all records.
+      tags:
+      - Gets
+  /records/{no}:
+    get:
+      consumes:
+      - '*/*'
+      description: Get a record by use no in covid-thailand-2021.csv.
+      parameters:
+      - description: No of record
+        in: path
+        name: "no"
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/model.AllOutputRecords'
+            type: array
+        "400":
+          description: Invalid no
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Show record by use no.
+      tags:
+      - Gets
+swagger: "2.0"

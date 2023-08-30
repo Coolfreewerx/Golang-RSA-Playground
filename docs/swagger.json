@@ -1,0 +1,129 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/records": {
+            "get": {
+                "description": "Get all records from covid-thailand-2021.csv.",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Gets"
+                ],
+                "summary": "Show all records.",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.AllOutputRecords"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/records/{no}": {
+            "get": {
+                "description": "Get a record by use no in covid-thailand-2021.csv.",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Gets"
+                ],
+                "summary": "Show record by use no.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "No of record",
+                        "name": "no",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.AllOutputRecords"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid no",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.AllOutputRecords": {
+            "type": "object",
+            "properties": {
+                "info_record": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.OutputRecord"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                },
+                "total_record": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.OutputRecord": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer"
+                },
+                "announce_date": {
+                    "type": "string"
+                },
+                "no": {
+                    "type": "integer"
+                },
+                "province_of_onset": {
+                    "type": "string"
+                },
+                "risk": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

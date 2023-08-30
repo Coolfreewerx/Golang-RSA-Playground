@@ -17,6 +17,14 @@ func NewRecordController() *RecordController {
 	return &RecordController{}
 }
 
+// @Summary 	Show all records.
+// @Description Get all records from covid-thailand-2021.csv.
+// @Tags 		Gets
+// @Accept 		*/*
+// @Produce 	json
+// @Success 	200 {array} m.AllOutputRecords "Success"
+// @Failure 	500 {string} string "Internal server error"
+// @Router 		/records [get]
 func (c *RecordController) GetAllRecords(context echo.Context) error {
 	records, err := c.recordService.GetAllRecords()
 	if err != nil {
@@ -25,6 +33,16 @@ func (c *RecordController) GetAllRecords(context echo.Context) error {
 	return context.JSON(http.StatusOK, records)
 }
 
+// @Summary 	Show record by use no.
+// @Description Get a record by use no in covid-thailand-2021.csv.
+// @Tags 		Gets
+// @Accept 		*/*
+// @Produce 	json
+// @Param       no path int true "No of record"
+// @Success 	200 {array} m.AllOutputRecords "Success"
+// @Failure 	400 {string} string "Invalid no"
+// @Failure 	500 {string} string "Internal server error"
+// @Router 		/records/{no} [get]
 func (c *RecordController) GetRecordByNo(context echo.Context) error {
 	no, err := strconv.Atoi(context.Param("no"))
 	if err != nil {

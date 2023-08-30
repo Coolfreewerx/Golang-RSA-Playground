@@ -13,22 +13,25 @@ import (
 	"golang.org/x/crypto/openpgp"
 	"golang.org/x/crypto/openpgp/packet"
 )
-
+// Export Public Key as Pem String
 func ExportPublicKeyAsPemStr(pubkey *rsa.PublicKey) string {
     pubkey_pem := string(pem.EncodeToMemory(&pem.Block{Type:  "RSA PUBLIC KEY",Bytes: x509.MarshalPKCS1PublicKey(pubkey)}))
     return pubkey_pem
 }
 
+// Export Private Key as Pem String
 func ExportPrivateKeyAsPemStr(privatekey *rsa.PrivateKey) string {
     privatekey_pem := string(pem.EncodeToMemory(&pem.Block{Type:  "RSA PRIVATE KEY",Bytes: x509.MarshalPKCS1PrivateKey(privatekey)}))
     return privatekey_pem
 }
 
+// Export Message as Pem String
 func ExportMsgAsPemStr(msg []byte) string {
     msg_pem := string(pem.EncodeToMemory(&pem.Block{Type:  "MESSAGE",Bytes: msg}))
     return msg_pem
 }
 
+// Convert Bytes to Private Key
 func BytesToPrivateKey(priv []byte, passphrase []byte) *rsa.PrivateKey {
     entityList, err := openpgp.ReadArmoredKeyRing(bytes.NewReader(priv))
 	if err != nil {
@@ -56,6 +59,7 @@ func BytesToPrivateKey(priv []byte, passphrase []byte) *rsa.PrivateKey {
 	return privateKey.PrivateKey.(*rsa.PrivateKey)
 }
 
+// Convert Bytes to Public Key
 func BytesToPublicKey(pub []byte) *rsa.PublicKey {
     entityList, err := openpgp.ReadArmoredKeyRing(bytes.NewReader(pub))
 	if err != nil {

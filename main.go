@@ -18,8 +18,9 @@ func main() {
 		log.Fatal("Error loading .env file", err)
 	}
 	
-	// Encrypt/Decrypt message with RSA and encode/decode encrypted message with base64
-	ciphers.CipherWithRSAandBase64(os.Getenv("TAM_PUBLIC_KEY"), os.Getenv("TAM_PRIVATE_KEY"), os.Getenv("MESSAGE"), os.Getenv("TAM_PASSPHRASE"))
+	// Encrypt/Decrypt file with RSA and encode/decode encrypted file with base64
+	ciphers.CipherFileWithRSAandBase64(os.Getenv("TAM_PUBLIC_KEY_PATH"), os.Getenv("TAM_PRIVATE_KEY_PATH"), 
+									   os.Getenv("FILE_ZIP_PATH"), os.Getenv("TAM_PASSPHRASE"), os.Getenv("ENCRYPT_FILE_PATH"), os.Getenv("DECRYPT_FILE_PATH"))
 
 	e := echo.New()
 

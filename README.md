@@ -1,17 +1,15 @@
 # Golang-RSA-Playground
-- Encrypt & Decrypt message by use public key & private key RSA-4096 (*.asc)  
-- Encode & Decode encrypted message by use Base64
+- Encrypt & Decrypt file (`*.csv.zip`) by use public key & private key RSA-4096 (`*.asc`)  
+- Encode & Decode encrypted file (*.csv.zip) by use Base64
 
 ### Result-Test
 
-	In practice, someone want to send a message to Tam will use Tam's public key to encrypt the message.
-	Then, Bring encrypted message to Tam by use Base64 to encode the message. 
-	After that, Tam will decode the message by use Base64 and decrypt the message by use Tam's private key.
-	Finaly, Tam will get the message.
+	In practice, someone want to send a zip file to Tam will use Tam's public key to encrypt the zip gilr.
+	Then, Bring encrypted zip file to Tam by use Base64 to encode the zip file. 
+	After that, Tam will decode the zip file by use Base64 and decrypt the zip file by use Tam's private key.
+	Finaly, Tam unzip file and got *.csv file.
 	
 ```
-Message : Test-RSA Decryption with Tam's Private Key
-
 -----BEGIN RSA PRIVATE KEY-----
 MIICXQIBAAKBgQDbHQDPnqbbiJM3NTkeG+4LeFOEVb6wr8magesbCMbP15tJuSFw....
 -----END RSA PRIVATE KEY-----
@@ -38,7 +36,9 @@ ZuTnpW5rA9qPdEmmDGE35V+g3iMUpDDo5FTeyvlGGhRmxUG6CnIDTIun9KhbLqJD....
 
 -------------End With Base64------------------
 
-RSA decrypted : Test-RSA Decryption with Tam's Private Key
+Decrypted success
+
+Finally, you will got unzip file in csv-files folder
 ```
 
 ### Conference

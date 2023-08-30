@@ -18,7 +18,7 @@ func (s *RecordService) initCSV() {
 	}
 
 	// Open the CSV file
-	file, err := os.Open(os.Getenv("FILE_NAME"))
+	file, err := os.Open(os.Getenv("FILE_PATH"))
 	if err != nil {
 		panic(err)
 	}

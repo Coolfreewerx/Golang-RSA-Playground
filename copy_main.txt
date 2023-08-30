@@ -1,0 +1,107 @@
+package main
+
+import (
+	"crypto/rand"
+	"crypto/rsa"
+	"crypto/sha256"
+	"decode-decrypt-playground/ciphers"
+	"fmt"
+	"io/ioutil"
+)
+
+const pubKey = "ciphers/tam-public-key.asc"
+const fileToEnc = "/tmp/data.txt"
+
+func main() {
+
+	/*/ 
+	 	In practice, someone want to send a message to Tam will use Tam's public key to encrypt the message.
+		Then, Bring encrypted message to Tam by use Base64 to encode the message. 
+		After that, Tam will decode the message by use Base64 and decrypt the message by use Tam's private key.
+		Finaly, Tam will get the message.
+	/*/
+
+ 	m := "Test-RSA Decryption with Tam's Private Key"
+	// dewMsg := "Test Dew Message"
+	fmt.Printf("\nMessage : %s\n\n", m)
+
+	dewPublicKeyData, _ := ioutil.ReadFile("ciphers/0x85D6D578-pub.asc")
+	dewPrivateKeyData, _ := ioutil.ReadFile("ciphers/0x85D6D578-sec.asc")
+	dewPhassphrase := []byte("12345")
+
+	dewPublicKey := ciphers.BytesToPublicKey(dewPublicKeyData)
+	dewPrivateKey := ciphers.BytesToPrivateKey(dewPrivateKeyData, dewPhassphrase)
+
+	fmt.Printf("%s\n",  ciphers.ExportPrivateKeyAsPemStr(dewPrivateKey))
+ 	fmt.Printf("%s\n", ciphers.ExportPublicKeyAsPemStr(dewPublicKey))
+
+	// tamPublicKeyData, _ := ioutil.ReadFile("ciphers/tamtam-public-key.asc")
+	// tamPrivateKeyData, _ := ioutil.ReadFile("ciphers/tamtam-private-key.asc")
+	// phassphrase := []byte("tamtam1122")
+
+	// tamPublicKey := ciphers.BytesToPublicKey(tamPublicKeyData)
+	// tamPrivateKey := ciphers.BytesToPrivateKey(tamPrivateKeyData, phassphrase)
+
+ 	// fmt.Printf("%s\n",  ciphers.ExportPrivateKeyAsPemStr(tamPrivateKey))
+ 	// fmt.Printf("%s\n", ciphers.ExportPublicKeyAsPemStr(tamPublicKey))
+
+ 	message := []byte(m)
+	fmt.Printf("--------%v\n", message)
+ 	label := []byte("")
+ 	hash := sha256.New()
+
+	// msg, _ := ioutil.ReadFile("ciphers/0x85D6D578-sec.asc.encrypted_and_signed.txt")
+	// fileEn, _ := ioutil.ReadFile("ciphers/Example Decrypt.zip.base64.txt.encrypted_and_signed.txt")
+	// file, _ := ioutil.ReadFile("ciphers/Example-Decrypt.zip")
+	// Encrypt message with Tam's Public Key
+ 	// ciphertext, err := ciphers.EncryptOAEP(hash, rand.Reader, tamPublicKey, file, label)
+	// if err != nil {
+	// 	fmt.Printf("Error Encrypt: %s", err)
+	// 	return
+	// }
+	// err = ioutil.WriteFile("ciphers/example.pgp", ciphertext, 0644)
+	//  if err != nil {
+	// 	 fmt.Printf("Error %s", err)
+	// 	 return
+	//  }
+ 	// fmt.Printf("%s\n",ciphers.ExportMsgAsPemStr(ciphertext))
+
+	// // Encode & Decode message from RSA Encryption by use base64
+	// data := ciphers.ExportMsgAsPemStr(ciphertext)
+	// ciphers.DecodeString(data)
+
+ 	// Decrypt message with Tam's Private Key
+	// fmt.Printf("------ CipherText : %v\n", ciphertext)
+
+	// fileRead, _ := ioutil.ReadFile("ciphers/example.pgp")
+ 	// plainText, err := ciphers.DecryptOAEP(hash, rand.Reader, tamPrivateKey, fileRead, label)
+	// if err != nil {
+	// 	fmt.Printf("Error Decrypt: %s", err)
+	// 	return
+	// }
+	// err = ioutil.WriteFile("example.zip", plainText, 0644)
+	// if err != nil {
+	// 	fmt.Println("Error", err)
+	// 	return
+	// }
+	// fmt.Printf("Decrypted success\n")
+ 	// fmt.Printf("RSA decrypted : %s", plainText)
+
+	// // ------- Dew
+	// test, _ := ioutil.ReadFile("ciphers/0x85D6D578-sec.asc.encrypted_and_signed.txt")
+	// // Encrypt message with Tam's Public Key
+	// ciphertext, _ := rsa.EncryptOAEP(hash, rand.Reader, dewPublicKey, message, label)
+	// fmt.Printf("%s\n",ciphers.ExportMsgAsPemStr(ciphertext))
+
+	// // Encode & Decode message from RSA Encryption by use base64
+	// data := ciphers.ExportMsgAsPemStr(ciphertext)
+	// ciphers.DecodeString(data)
+
+	// // Decrypt message with Tam's Private Key
+	// plainText, err := rsa.DecryptOAEP(hash, rand.Reader, dewPrivateKey, test, label)
+	// if err != nil {
+	// 	fmt.Println("Decrypt error :", err)
+	// }
+	// fmt.Printf("RSA decrypted : %s", plainText)
+
+}

@@ -126,3 +126,5 @@ func DecryptOAEP(hash hash.Hash, random io.Reader, private *rsa.PrivateKey, msg 
 
     return decryptedBytes, nil
 }
+
+func DecryptFile()

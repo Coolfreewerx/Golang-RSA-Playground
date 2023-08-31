@@ -1,19 +1,17 @@
 package main
 
 import (
-	// "decode-decrypt-playground/ciphers"
-
+	c "decode-decrypt-playground/controller"
 	"log"
 	"os"
-	c "decode-decrypt-playground/controller"
 
 	"github.com/joho/godotenv"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/echo/v4"
 
-	echoSwagger "github.com/swaggo/echo-swagger" 
 	_ "decode-decrypt-playground/docs"
 
-
+	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 // @title Swagger Example API for Golang-RSAPlayground
@@ -35,12 +33,21 @@ func main() {
 
 	e := echo.New()
 
+	// Middleware for adding custom headers
+	e.Use(middleware.AddTrailingSlash())
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	e.GET("/", func(c echo.Context) error {
 		return c.String(200, "Hello, World!")
 	})
+
+	// WEB AMLO
+	e.POST("/web-amlo", c.NewWebAmloController().WebAmloRequest)
 	
+	// DATABASE
 	e.GET("/records", c.NewRecordController().GetAllRecords)
 	e.GET("/records/:no", c.NewRecordController().GetRecordByNo)
 

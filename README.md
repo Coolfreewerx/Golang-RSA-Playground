@@ -6,7 +6,7 @@
 ## Result-Test
 #### Encrypt zip file , encode/decode encrypted zip file and decrypt zip file to csv file
 
-	In practice, someone want to send a zip file to Tam will use Tam's public key to encrypt the zip gilr.
+	In practice, someone want to send a zip file to Tam, so use Tam's public key to encrypt the zip file.
 	Then, Bring encrypted zip file to Tam by use Base64 to encode the zip file. 
 	After that, Tam will decode the zip file by use Base64 and decrypt the zip file by use Tam's private key.
 	Finaly, Tam unzip file and got *.csv file.
